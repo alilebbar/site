@@ -3,6 +3,7 @@ const ticket={
     prix : 50,
     numsalle : 15
 }
+let aa= 55;
 let nom = "ali";
 console.log(ticket);
 console.log(nom);
