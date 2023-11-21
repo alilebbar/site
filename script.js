@@ -15,12 +15,3 @@ mcf.pop()
 console.log(mcf)
 let nbmcf=mcf.length
 console.log(nbmcf)
-let listmots = ["Cachalot","Pétunia","Serviette"]
-let score = 0
-let mot = prompt("entrer le mot "+listmots[0])
-if(mot===listmots[0]){
-    score++
-}else{
-    console.log("vous avez raté la reponse")
-}
-console.log(score)
