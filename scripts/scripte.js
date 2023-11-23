@@ -1,65 +1,51 @@
-
-//la fonction des choix 
-function ResultaChoix(){
-    let testChoix = prompt("mot ou phrase ?")
-    while(testChoix !== "mot" && testChoix !== "phrase"){
-    testChoix = prompt("mot ou phrase ?")
-    }
-return testChoix
-}
 //afficher le resultat 
-function AfficherResultat(resultat){
-    switch (resultat){
-        case 0:
-        {
-            console.log("Dommage vous etes null votre resultat est 0 essaye la prochaine fois")
-            break;
-        }
-        case 1:
-            {
-             console.log("votre resulta est 1 essaye la prochaine fois!")
-             break;   
-            }
-        case 2:
-            {
-             console.log("bravo votre resultat 2 !")
-             break;   
-            }
-        case 3:
-            {
-             console.log("exellent votre resultat est 3")   
-             break;
-            }
-
-    }
-
-
+function AfficherResultat(resultat,nombrelist){
+    let resultathtm=document.querySelector(".zoneScore span")
+    resultathtm.innerText=resultat+"/"+nombrelist
 }
-//Boucle de jeu
-function BoucleDeJeu(choixUtilisateur){
-        let list 
-        if (choixUtilisateur='mot'){
-            list = [...listmots]
-        }else{
-            list = [...listphrase]
-        }
-        let i=0
-        let score=0
-        while(i<list.length){
-        let mot = prompt("entrer le mot : "+list[i])
-        if(mot===list[i]){
-            score++
-        }
-        i++
-        }
-        return score
-        
+function choix(){
+         let choix = document.querySelectorAll(".optionSource input")
+         for(e=0;e<choix.length;e++){
+            if(choix[e].checked)break;
+         }
+         return e
 }
+
+
 //fonction principale
 function Principale(){
-    let choix = ResultaChoix()
-    let resultatfinal=BoucleDeJeu(choix)
-    AfficherResultat(resultatfinal)
+    let nombreProposer=0
+    let score=0
+    let i=0
+    let choix1=choix()
+    let list
+    if(choix1===0){
+        list=[...listmots]
+     }else{
+        list=[...listphrase]
+    }
+    let ZoneDeProposition=document.querySelector(".zoneProposition")
+    ZoneDeProposition.innerText= list[i]
+    let zoneEcriture=document.getElementById("inputEcriture")
+    let bouton=document.getElementById("btnValiderMot")
+    bouton.addEventListener("click",()=>{
+        
+    if(zoneEcriture.value===list[i])
+             {
+                score++
+             }
+             i++
+      zoneEcriture.value=''
+      if(list[i]=== undefined){
+        ZoneDeProposition.innerText="le jeu est fini"
+        bouton.disabled=true
+       }else{
+        ZoneDeProposition.innerText=list[i]
+       }
+       AfficherResultat(score,i)
+    })
+
+
 }
 
 
