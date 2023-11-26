@@ -1,3 +1,3 @@
 //la declaration des tableau 
-let listmots = ["Cachalot","Pétunia","Serviette"]
-let listphrase = ["Pas de panique !","La vie, l’univers et le reste","Merci pour le poisson"]
+let listeMots = ["Cachalot 1","Pétunia 2","Serviette 3"]
+let listePhrases = ["Pas de panique ! 1","La vie, l’univers et le reste 2","Merci pour le poisson 3"]

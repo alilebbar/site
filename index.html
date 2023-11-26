@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
+    <script src="scripts/popup.js" defer></script>
     <script src="scripts/config.js" defer></script>
     <script src="scripts/scripte.js" defer></script>
     <script src="scripts/main.js" defer></script>
@@ -22,9 +23,9 @@
         <div class="zoneOptions">
             <p>Choisissez votre option, puis commencez à taper dans le champ prévu à cet effet.</p>
             <div class="optionSource">
-                <input type="radio" name="optionSource" id="mots" value="1"  checked>
+                <input type="radio" name="optionSource" id="mots" value="1" checked  >
                 <label for="mots">Mots</label>
-                <input type="radio" name="optionSource" id="phrases" value="2" >
+                <input type="radio" name="optionSource" id="phrases" value="2"  >
                 <label for="phrases">Phrases</label>
             </div>
         </div>
@@ -41,6 +42,22 @@
         <div class="zoneScore">
             Votre score : <span></span>
         </div>
+        <div class="zonePartage">
+            <button>partager</button>
+        </div>
+            <div class="popupBackground">
+                <div class="popup">
+                    <div>Partagez votre score</div>
+                    <form>
+                        <label for="nom">Votre nom</label>
+                        <input type="text" name="nom" placeholder="Votre nom">
+                        <label for="email">Avec qui voulez-vous partager votre score ?</label>
+                        <input type="email" name="email" placeholder="nom@domaine.com">
+                        <button id="btnEnvoyerMail">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+    
 
     </main>
 

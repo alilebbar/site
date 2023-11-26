@@ -1,55 +1,66 @@
-//afficher le resultat 
-function AfficherResultat(resultat,nombrelist){
-    let resultathtm=document.querySelector(".zoneScore span")
-    resultathtm.innerText=resultat+"/"+nombrelist
+function AfficherResultat(score,nbpropositon){
+    let affichage=document.querySelector(".zoneScore span")
+    affichage.innerHTML=`${score}/${nbpropositon}`
 }
-function choix(){
-         let choix = document.querySelectorAll(".optionSource input")
-         for(e=0;e<choix.length;e++){
-            if(choix[e].checked)break;
-         }
-         return e
+function afficherProposer(caractaire){
+    let Zonedeprorposition=document.querySelector(".zoneProposition")
+    Zonedeprorposition.innerText=caractaire
 }
-
-
-//fonction principale
-function Principale(){
-    let nombreProposer=0
+/**
+ * Cette fonction construit et affiche l'email. 
+ * @param {string} nom : le nom du joueur
+ * @param {string} email : l'email de la personne avec qui il veut partager son score
+ * @param {string} score : le score. 
+ */
+function afficherEmail(nom, email, score) {
+    let mailto = `mailto:${email}+?subject=Partage du score Azertype&body=Salut, je suis ${nom} et je vais de réaliser le score ${score} sur le site d'Azertype !`
+    location.href = mailto
+}
     let score=0
     let i=0
-    let choix1=choix()
-    let list
-    if(choix1===0){
-        list=[...listmots]
-     }else{
-        list=[...listphrase]
+    let liste
+function lancerJeu(){
+    score=0
+    i=0
+    liste=listeMots
+    initAddEventListenerPopup()
+let Zonedeprorposition=document.querySelector(".zoneProposition")
+Zonedeprorposition.innerText=liste[i]
+let Bouton=document.getElementById("btnValiderMot")
+Bouton.addEventListener("click",()=>{
+    let ZoneEcriture=document.getElementById("inputEcriture")
+    if(ZoneEcriture.value===liste[i]){
+        score++
     }
-    let ZoneDeProposition=document.querySelector(".zoneProposition")
-    ZoneDeProposition.innerText= list[i]
-    let zoneEcriture=document.getElementById("inputEcriture")
-    let bouton=document.getElementById("btnValiderMot")
-    bouton.addEventListener("click",()=>{
-        
-    if(zoneEcriture.value===list[i])
-             {
-                score++
-             }
-             i++
-      zoneEcriture.value=''
-      if(list[i]=== undefined){
-        ZoneDeProposition.innerText="le jeu est fini"
-        bouton.disabled=true
-       }else{
-        ZoneDeProposition.innerText=list[i]
-       }
-       AfficherResultat(score,i)
-    })
+    i++
+    AfficherResultat(score,i)
+    ZoneEcriture.value=""
+    if(liste[i]===undefined){
+        afficherProposer("partie terminer")
+        Bouton.disabled=true
+    }else{
+        afficherProposer(liste[i])
+    }
+    AfficherResultat(score,i)
 
-
+})
 }
-
-
-
-
-
-
+let radio=document.querySelectorAll(".optionSource input")
+for(index=0;index<radio.length;index++){
+    radio[index].addEventListener("change",(event)=>{
+        if(event.target.value==="1"){
+           liste=listeMots
+        }else{
+            liste=listePhrases
+        }
+        afficherProposer(liste[i])
+    })
+    AfficherResultat(score,i)
+}
+let form=document.querySelector("form")
+form.addEventListener("submit",(event)=>{
+    event.preventDefault()
+    let nom=document.querySelector("form input[type='text']")
+    let email=document.querySelector("form input[type='email']")
+    afficherEmail(nom.value, email.value, score)
+})
