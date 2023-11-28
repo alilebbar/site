@@ -19,6 +19,10 @@ function afficherEmail(nom, email, score) {
     let score=0
     let i=0
     let liste
+
+
+
+
 function lancerJeu(){
     score=0
     i=0
@@ -57,10 +61,48 @@ for(index=0;index<radio.length;index++){
     })
     AfficherResultat(score,i)
 }
+//message d'erreur
+function AfficherMessageErreur(messageErreur){
+   let MessageErr=document.getElementById("erreur")
+   MessageErr.innerText=messageErreur
+}
+
+//fonction gere formulaire
+
+function gererFormulaire(){
+    try{
+        let nom=document.querySelector("form input[type='text']")
+        ValidNom(nom.value)
+        let email=document.querySelector("form input[type='email']")
+        ValidEmail(email.value)
+        afficherEmail(nom.value, email.value, score)
+        AfficherMessageErreur("") 
+    }catch(erreur){
+        AfficherMessageErreur(erreur.message) 
+    }
+    
+}
+
+// ecouter le submit du formulaire
 let form=document.querySelector("form")
 form.addEventListener("submit",(event)=>{
     event.preventDefault()
-    let nom=document.querySelector("form input[type='text']")
-    let email=document.querySelector("form input[type='email']")
-    afficherEmail(nom.value, email.value, score)
+    gererFormulaire()
 })
+
+
+// fonction pour valider le nom du formulaire
+function ValidNom(nom){
+     if(nom.length<2){
+        throw new Error("le nom est trop court.");
+     }
+    
+}
+// fonction pour valider l'email
+function ValidEmail(email){
+    emailRegexp= new RegExp("[a-z0-9-_.]+@[a-z0-9-_.]+\\.[a-z0-9-_.]+")
+    if(!emailRegexp.test(email)){
+        throw new Error("l'email n'est pas ecrit correctement.")
+    }
+    
+}
